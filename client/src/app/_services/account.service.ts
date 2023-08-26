@@ -10,7 +10,6 @@ export class AccountService {
   baseUrl = 'https://localhost:7019/api/';
   private currentUserSource = new BehaviorSubject<User | null>(null); //initial value of the subject is null in the absence of any users in the local storage
   currentUser$ = this.currentUserSource.asObservable();
-  user: any = {};
 
   constructor(private http: HttpClient) {}
 
