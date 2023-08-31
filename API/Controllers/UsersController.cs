@@ -1,10 +1,10 @@
-using API.Data;
+using System.Security.Claims;
+using API.Dtos;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -37,15 +37,14 @@ namespace API.Controllers
             return Ok(userToReturn);
         }
 
-        // [HttpDelete("{id}")]
-        // public async Task<ActionResult<AppUser>> Delete(int id)
-        // {
-        //     var user = await _db.Users.SingleOrDefaultAsync(x => x.Id == id);
-        //     if (user == null) return BadRequest();
-
-        //     _db.Users.Remove(user);
-        //     await _db.SaveChangesAsync();
-        //     return Ok(user);
-        // }
+        [HttpPut("{username}")]
+        public async Task<ActionResult> UpdateUser(string username, MemberUpdateDTO memberUpdateDto)
+        {
+            var user = await _userRepo.GetUserByUsernameAsync(username);
+            if (user == null) return NotFound();
+            _mapper.Map(memberUpdateDto, user);
+            if (await _userRepo.SaveAllAsync()) return NoContent();
+            return BadRequest("Failed to update user");
+        }
     }
 }

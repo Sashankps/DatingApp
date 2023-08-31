@@ -1,3 +1,4 @@
 {
-  "dotnet.defaultSolution": "DatingApp.sln"
+  "dotnet.defaultSolution": "DatingApp.sln",
+  "editor.acceptSuggestionOnEnter": "on"
 }
