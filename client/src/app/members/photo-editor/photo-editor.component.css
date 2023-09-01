@@ -1,0 +1,69 @@
+/* photo-editor.component.css */
+.smaller-photo {
+  width: 100px; /* Set your desired width */
+  height: auto; /* Maintain aspect ratio */
+}
+/* photo-editor.component.css */
+/* Styles for the photo grid */
+.row {
+  margin-bottom: 20px;
+}
+
+.col-2 {
+  text-align: center;
+}
+
+.img-thumbnail {
+  width: 100%;
+  height: auto;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for buttons */
+.btn-sm {
+  margin-top: 10px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.btn-success.active {
+  background-color: #218838;
+  border-color: #218838;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+/* Styles for file upload area */
+.my-drop-zone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.fa-upload {
+  color: #ccc;
+}
+
+/* Styles for the upload queue */
+.table {
+  margin-top: 20px;
+}
+
+/* Styles for progress bar */
+.progress {
+  margin-top: 10px;
+}
+
+.progress-bar {
+  background-color: #007bff;
+}

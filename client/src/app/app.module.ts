@@ -22,6 +22,8 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { MemberEditsComponent } from './members/member-edits/member-edits.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptor/loading.interceptor';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -35,9 +37,11 @@ import { LoadingInterceptor } from './_interceptor/loading.interceptor';
     MessagesComponent,
     MemberCardComponent,
     MemberEditsComponent,
+    PhotoEditorComponent,
   ],
   imports: [
     BrowserModule,
+    FileUploadModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
