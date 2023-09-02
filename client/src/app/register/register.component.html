@@ -1,28 +1,155 @@
-<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="false">
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="registerForm.valid && register()"
+  autocomplete="false"
+>
   <h2 class="text-center text-primary">Sign up</h2>
   <hr />
   <div class="mb-3">
+    <label style="margin-right: 10px">Gender: </label>
+    <label class="from-check-label">
+      <input
+        type="radio"
+        class="form-check-input"
+        value="male"
+        formControlName="gender"
+      />Male
+    </label>
+    <label class="from-check-label ms-3">
+      <input
+        type="radio"
+        class="form-check-input"
+        value="female"
+        formControlName="gender"
+      />Female
+    </label>
+  </div>
+
+  <div class="mb-3">
     <input
-      name="username"
-      [(ngModel)]="model.username"
+      formControlName="username"
       type="text"
       class="form-control"
       placeholder="Username"
     />
+    <div
+      class="text-danger"
+      *ngIf="
+        registerForm.get('username')?.touched &&
+        registerForm.get('username')?.invalid
+      "
+    >
+      {{ getErrorMessage("username") }}
+    </div>
   </div>
+
   <div class="mb-3">
     <input
-      name="password"
-      [(ngModel)]="model.password"
+      formControlName="knownAs"
       type="text"
+      class="form-control"
+      placeholder="KnowsAs"
+    />
+    <div
+      class="text-danger"
+      *ngIf="
+        registerForm.get('knownAs')?.touched &&
+        registerForm.get('knownAs')?.invalid
+      "
+    >
+      {{ getErrorMessage("knownAs") }}
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <input
+      formControlName="city"
+      type="text"
+      class="form-control"
+      placeholder="City"
+    />
+    <div
+      class="text-danger"
+      *ngIf="
+        registerForm.get('city')?.touched && registerForm.get('city')?.invalid
+      "
+    >
+      {{ getErrorMessage("city") }}
+    </div>
+  </div>
+
+  <app-date-picker
+    [formControl]="$any(registerForm.controls['dateOfBirth'])"
+    [label]="'Date of birth'"
+    [maxDate]="maxDate"
+  ></app-date-picker>
+
+  <div class="mb-3">
+    <input
+      formControlName="country"
+      type="text"
+      class="form-control"
+      placeholder="Country"
+    />
+    <div
+      class="text-danger"
+      *ngIf="
+        registerForm.get('country')?.touched &&
+        registerForm.get('country')?.invalid
+      "
+    >
+      {{ getErrorMessage("country") }}
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <input
+      formControlName="password"
+      type="password"
       class="form-control"
       placeholder="Password"
     />
+    <div
+      class="text-danger"
+      *ngIf="
+        registerForm.get('password')?.touched &&
+        registerForm.get('password')?.invalid
+      "
+    >
+      {{ getErrorMessage("password") }}
+    </div>
   </div>
+
+  <div class="mb-3">
+    <input
+      formControlName="confirmPassword"
+      type="password"
+      class="form-control"
+      placeholder="Confirm Password"
+    />
+    <div
+      class="text-danger"
+      *ngIf="
+        registerForm.get('confirmPassword')?.touched &&
+        registerForm.get('confirmPassword')?.invalid
+      "
+    >
+      {{ getErrorMessage("confirmPassword") }}
+    </div>
+  </div>
+
   <div class="text-center">
-    <button class="btn btn-primary me-2" type="submit">Register</button>
+    <button
+      class="btn btn-primary me-2"
+      type="submit"
+      [disabled]="!registerForm.valid"
+    >
+      Register
+    </button>
     <button class="btn btn-default" type="button" (click)="cancel()">
       Cancel
     </button>
   </div>
 </form>
+
+<p>Form validity : {{ registerForm.valid | json }}</p>
