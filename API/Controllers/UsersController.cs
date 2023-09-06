@@ -3,8 +3,10 @@ using System.Security.Claims;
 using API.Dtos;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,19 +28,25 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers()
+        public async Task<ActionResult<PagedList<MemberDTO>>> GetUsers([FromQuery] UserParams userParams)
         {
-            var users = await _userRepo.GetUsersAsync();
-            var usersToReturn = _mapper.Map<IEnumerable<MemberDTO>>(users);
-            return Ok(usersToReturn);
+            var currentUser = await _userRepo.GetUserByUsernameAsync(User.GetUsername());
+            userParams.CurrentUsername = currentUser.UserName;
+
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = currentUser.Gender == "male" ? "female" : "male";
+            }
+
+            var users = await _userRepo.GetMembersAsync(userParams);
+            Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages));
+            return Ok(users);
         }
 
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDTO>> GetUser(string username)
         {
-            var user = await _userRepo.GetUserByUsernameAsync(username);
-            var userToReturn = _mapper.Map<MemberDTO>(user);
-            return Ok(userToReturn);
+            return await _userRepo.GetMemberAsync(username);
         }
 
         [HttpPut("{username}")]
@@ -50,7 +58,6 @@ namespace API.Controllers
             if (await _userRepo.SaveAllAsync()) return NoContent();
             return BadRequest("Failed to update user");
         }
-
 
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file)
@@ -116,6 +123,8 @@ namespace API.Controllers
 
             return BadRequest("Problem deleting photo");
         }
+
+
 
     }
 }
