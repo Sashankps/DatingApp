@@ -12,7 +12,6 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
-import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ToastrModule } from 'ngx-toastr';
@@ -29,6 +28,7 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
+import { ListsComponent } from './lists/lists.component';
 
 @NgModule({
   declarations: [
@@ -38,12 +38,12 @@ import { TimeagoModule } from 'ngx-timeago';
     RegisterComponent,
     MemberListComponent,
     MemberDetailsComponent,
-    ListsComponent,
     MessagesComponent,
     MemberCardComponent,
     MemberEditsComponent,
     PhotoEditorComponent,
     DatePickerComponent,
+    ListsComponent,
   ],
   imports: [
     BrowserModule,
