@@ -29,6 +29,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
 import { ListsComponent } from './lists/lists.component';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ListsComponent } from './lists/lists.component';
     PhotoEditorComponent,
     DatePickerComponent,
     ListsComponent,
+    MemberMessagesComponent,
   ],
   imports: [
     BrowserModule,

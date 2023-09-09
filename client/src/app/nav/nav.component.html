@@ -10,7 +10,11 @@
         style="cursor: pointer"
       >
         <li class="nav-item">
-          <a class="nav-link" routerLink="/members" routerLinkActive="active"
+          <a
+            class="nav-link"
+            routerLink="/members"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="active"
             >Matches</a
           >
         </li>
